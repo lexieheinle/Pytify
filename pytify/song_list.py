@@ -50,6 +50,8 @@ class SongList():
         self.items.append('Play: <p> <enter>')
         self.items.append('Search: <s>')
         self.items.append('Play/Pause: <spacebar>')
+        self.items.append('Add song to Mellow playlist: <m>')
+        self.items.append('Add song to Favorite playlist: <f>')
         self.items.append('Quit: <q>')
 
     def navigate(self, n):
@@ -121,6 +123,14 @@ class SongList():
             # Play/Pause
             elif key == ord(' '):
                 self.pytify.play_pause()
+
+            # Add song to mellow playlist
+            elif key == ord('m'):
+                self.pytify.add_mellow()
+
+            # Add song to favorite playlist
+            elif key == ord('f'):
+                self.pytify.add_favorite()
 
             # Search
             elif key == ord('s'):

@@ -39,7 +39,12 @@ class App:
         parser.add_argument(
             '-c', help='current playing', action='store_true'
         )
-
+        parser.add_argument(
+            '-m', help='add current to mellow playlist', action='store_true'
+        )
+        parser.add_argument(
+            '-f', help='add current to favorite playlist', action='store_true'
+        )
         args = parser.parse_args()
 
         if args.n:
@@ -56,6 +61,12 @@ class App:
 
         elif args.c:
             print(self.pytify.get_current_playing())
+
+        elif args.m:
+            self.pytify.add_mellow()
+
+        elif args.f:
+            self.pytify.add_favorite()
 
         else:
             self.interaction()

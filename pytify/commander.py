@@ -21,7 +21,9 @@ class Commander():
             'prev': 'play previous song',
             'pp': 'play or pause song',
             'stop': 'stop',
-            'history': 'last ten history entries'
+            'history': 'last ten history entries',
+            'add_mellow': 'add current song to mellow playlist',
+            'add_favorite': 'add current song to favorite playlist'
         }
 
     def validate(self, command):
@@ -70,5 +72,11 @@ class Commander():
 
         elif command == 'history':
             self.pytify.print_history()
+
+        elif command == 'add_mellow':
+            self.pytify.add_mellow()
+
+        elif command == 'add_favorite':
+            self.pytify.add_favorite()
 
         return True

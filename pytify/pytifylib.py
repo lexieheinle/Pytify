@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 import sys
+import os
 import spotipy
+import spotipy.util as util
 from pytify.history import history
 from spotipy.oauth2 import SpotifyClientCredentials
 
@@ -9,7 +11,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 class Pytifylib:
     # hold songs
     _songs = {}
-
+    _scope = 'playlist-modify-public'
     # limit output songs
     _limit = 15
 
@@ -17,10 +19,11 @@ class Pytifylib:
         return self.getCredentials()
 
     def getCredentials(self):
-        try:
-            return spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
-        except spotipy.oauth2.SpotifyOauthError:
-            print('Did not find Spotify credentials.')
+        token = util.prompt_for_user_token('1234973619', self._scope, client_id=os.environ.get('SPOTIFY_CLIENT_ID'), client_secret=os.environ.get('SPOTIFY_CLIENT_SECRET'), redirect_uri='http://localhost/')
+        if token:
+            return spotipy.Spotify(auth=token)
+        else:
+            print('Did not find Spotify credentials. or token')
 
             print('Please visit https://github.com/bjarneo/pytify#credentials for more information.')
 
@@ -127,6 +130,12 @@ class Pytifylib:
         raise NotImplementedError()
 
     def pause(self):
+        raise NotImplementedError()
+
+    def add_mellow(self):
+        raise NotImplementedError()
+
+    def add_favorite(self):
         raise NotImplementedError()
 
     def get_current_playing(self):
